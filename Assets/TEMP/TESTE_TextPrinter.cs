@@ -33,7 +33,7 @@ namespace TESTE
         // Update is called once per frame
         void Update()
         {
-            if (Input.GetKeyDown(KeyCode.Space)) //ADICIONAR PRA CLIQUE
+            if (Input.GetKeyDown(KeyCode.Space) || Input.GetButtonDown("Fire1"))
                 printer.Build(falas[Random.Range(0,falas.Length)]);
         }
     }
