@@ -6,11 +6,11 @@ public class TextPrinter
 {
     private TextMeshProUGUI tmpro_ui;
     private TextMeshPro tmpro_world;
-    public TMP_Text tmpro => ((tmpro_ui != null) ? tmpro_ui : tmpro_world); //permite arrastar o texto tanto da UI quanto do mundo 3D
+    public TMP_Text tmpro => tmpro_ui != null ? tmpro_ui : tmpro_world; //permite arrastar o texto tanto da UI quanto do mundo 3D
 
     public string currentText => tmpro.text;
     public string targetText { get; private set; } = "";
-    public string preText { get; private set; } = ""; //texto atual, serve pra adicionar a possibilidade de adicionar (append) ao texto atual ao inves de comacar um novo
+    public string preText { get; private set; } = ""; //pega o texto atual, serve pra adicionar a possibilidade de adicionar (append) ao texto atual ao inves de comacar um novo
     private int preTextLenght = 0;
     public string fullTargetText => preText + targetText;
 
@@ -150,9 +150,10 @@ public class TextPrinter
     {
         while (tmpro.maxVisibleCharacters < tmpro.textInfo.characterCount)
         {
-            tmpro.maxVisibleCharacters += /*CELERA ? charactersPerCycle*5 :*/ charactersPerCycle;
+            tmpro.maxVisibleCharacters += CELERA ? charactersPerCycle*5 : charactersPerCycle;
+            yield return new WaitForSeconds(0.015f / txtSpeed);
         }
-        yield return new WaitForSeconds(0.015f/*/txtSpeed*/);
+        
     }
     private IEnumerator Build_Fade()
     {
