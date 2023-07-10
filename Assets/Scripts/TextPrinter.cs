@@ -8,19 +8,18 @@ public class TextPrinter
     private TextMeshPro tmpro_world;
     public TMP_Text tmpro => tmpro_ui != null ? tmpro_ui : tmpro_world; //permite arrastar o texto tanto da UI quanto do mundo 3D
 
-     //public string currentText => tmpro.text; //atualmente faz altos nada
+    public string currentText => tmpro.text;
     public string targetText { get; private set; } = "";
-    public string preText { get; private set; } = ""; //pega o texto atual, serve pra adicionar a possibilidade de adicionar (append) ao texto atual ao inves de comecar um novo
-    public string fullTargetText => preText + targetText; //preText eh vazio exceto no caso do Append
+    public string preText { get; private set; } = ""; //pega o texto atual, serve pra adicionar a possibilidade de adicionar (append) ao texto atual ao inves de comacar um novo
+    private int preTextLenght = 0;
+    public string fullTargetText => preText + targetText;
 
-    public Color textColor { get { return tmpro.color; } set { tmpro.color = value; } }
 
     //controla como o texto aparece
-    //instant: instantaneo
-    //typewriter: caractere por caractere
-    //fade: nao implementado
-    public enum BuildMethod { instant, typewriter, fade }
+    public enum BuildMethod { instant, typewriter, fade}
     public BuildMethod buildMethod = BuildMethod.typewriter;
+
+    public Color textColor { get { return tmpro.color; } set { tmpro.color = value; } }
 
 
     //controla a velocidade que o texto aparece
@@ -30,7 +29,7 @@ public class TextPrinter
     //permite imprimir mais de um caractere por frame 
     public int charactersPerCycle { get { return txtSpeed <= 2f ? characterMultiplier : txtSpeed <= 2.5f ? characterMultiplier * 2 : characterMultiplier * 3; } }
     private int characterMultiplier = 1;
-    //bool CELERA = false; //a ideia era acelerar o texto quando clica, e completar se clicar 2 vezes, mas acho melhor completar o dialogo direto logo
+    //bool CELERA = false; //a ideia era acelerar o texto quando clica, mas acho ser melhor completar o dialogo direto
 
 
     //construtores
