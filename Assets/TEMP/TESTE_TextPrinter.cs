@@ -13,8 +13,8 @@ namespace TESTE
 
         string[] falas = new string[5]
         {
-            "Oi, tudo bem?",
-            "Me deixa em paz. Eu preciso de um tempo a sós comigo mesmo. Espero que você entenda.",
+            "Oi, tudo bem meu querido?",
+            "Me deixe em paz. Eu preciso de um tempo a sós comigo mesmo. Espero que você entenda.",
             "Este texto está saindo da minha boca de livre e espontânea vontade e eu não sou um código programado para imprimir esta sequência de caracteres.",
             "É um pássaro? É um avião? Não, é apenas o espírito que me assombra todos os dias...",
             "Estou com muito frio. Mas o que mais me incomoda, é que está frio por dentro, também..."
@@ -33,7 +33,7 @@ namespace TESTE
         // Update is called once per frame
         void Update()
         {
-            if (Input.GetKeyDown(KeyCode.Space) || Input.GetButtonDown("Fire1"))
+            if (Input.GetKeyDown(KeyCode.Space) || Input.GetButtonDown("Fire1"))//fire1 = mouse (botao esquerdo)
             { 
                 if (printer.isBuilding)
                 {
@@ -47,7 +47,7 @@ namespace TESTE
             {
                 if (printer.isBuilding)
                 {
-                    //teria um if intermediario dependesndo de CELERA ser true ou false caso seja implementado
+                    //teria um if intermediario dependendo de CELERA ser true ou false caso seja implementado
                     printer.ForceComplete();
                 }
                 else
