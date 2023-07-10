@@ -34,7 +34,19 @@ namespace TESTE
         void Update()
         {
             if (Input.GetKeyDown(KeyCode.Space) || Input.GetButtonDown("Fire1"))
-                printer.Build(falas[Random.Range(0,falas.Length)]);
+            { 
+                if (printer.isBuilding)
+                {
+                    //teria um if intermediario dependendo de CELERA ser true ou false caso seja implementado
+                    printer.ForceComplete();
+                }
+                else
+                    printer.Build(falas[Random.Range(0, falas.Length)]);
+            }
+            else if (Input.GetKeyDown(KeyCode.A))
+            {
+                printer.Append(falas[Random.Range(0, falas.Length)]);
+            }
         }
     }
 }

@@ -29,7 +29,7 @@ public class TextPrinter
     //permite imprimir mais de um caractere por frame 
     public int charactersPerCycle { get { return txtSpeed <= 2f ? characterMultiplier : txtSpeed <= 2.5f ? characterMultiplier * 2 : characterMultiplier * 3; } }
     private int characterMultiplier = 1;
-    bool CELERA = false;
+    //bool CELERA = false; //a ideia era acelerar o texto quando clica, mas acho ser melhor completar o dialogo direto
 
 
     //construtores
@@ -115,6 +115,19 @@ public class TextPrinter
     private void OnComplete()
     {
         buildProcess = null;
+        //CELERA = false;
+    }
+
+    public void ForceComplete()
+    {
+        switch (buildMethod)
+        {
+            case BuildMethod.typewriter:
+                tmpro.maxVisibleCharacters = tmpro.textInfo.characterCount;
+                break;
+            case BuildMethod.fade:
+                break;
+        }
     }
 
     //definicoes do preparo do metodo de impressao
@@ -150,7 +163,7 @@ public class TextPrinter
     {
         while (tmpro.maxVisibleCharacters < tmpro.textInfo.characterCount)
         {
-            tmpro.maxVisibleCharacters += CELERA ? charactersPerCycle*5 : charactersPerCycle;
+            tmpro.maxVisibleCharacters += /*CELERA ? charactersPerCycle*5 :*/ charactersPerCycle;
             yield return new WaitForSeconds(0.015f / txtSpeed);
         }
         
