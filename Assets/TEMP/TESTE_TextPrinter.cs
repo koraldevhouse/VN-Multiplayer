@@ -27,7 +27,7 @@ namespace TESTE
         {
             ds = DialogueSystem.instance;
             printer = new TextPrinter(ds.dialogueBox.dialogueText);
-            printer.buildMethod = TextPrinter.BuildMethod.typewriter;
+            printer.buildMethod = TextPrinter.BuildMethod.typewriter; //muda como o texto eh impresso
         }
 
         // Update is called once per frame
@@ -45,7 +45,13 @@ namespace TESTE
             }
             else if (Input.GetKeyDown(KeyCode.A))
             {
-                printer.Append(falas[Random.Range(0, falas.Length)]);
+                if (printer.isBuilding)
+                {
+                    //teria um if intermediario dependesndo de CELERA ser true ou false caso seja implementado
+                    printer.ForceComplete();
+                }
+                else
+                    printer.Append(falas[Random.Range(0, falas.Length)]);
             }
         }
     }
