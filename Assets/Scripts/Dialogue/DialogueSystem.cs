@@ -3,8 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
+/// <summary>
+///controla o texto que vai ser lido pra tela e, futuramente, como ele vai ser lido dos arquivos
+/// </summary>
 
-//controla o texto que vai ser lido pra tela e, futuramente, como ele vai ser lido dos arquivos
 namespace DIALOGUE
 {
     public class DialogueSystem : MonoBehaviour

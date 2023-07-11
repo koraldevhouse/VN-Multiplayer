@@ -2,14 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
 using UnityEngine;
+/// <summary>
+/// essa classe é responsavel por processar as linhas de texto do arquivo e passar para DIALOGUE_LINE armazenar
+/// </summary>
 
-// essa classe é responsavel por processar as linhas de texto do arquivo e passar para DIALOGUE_LINE armazenar
-//
+
 // a estrutura da linha eh:      nome {outros parametros}      "fala"      funcoes()
 // 
 // pode ter so nome e fala, ou so funcoes, mas de toda forma o importante eh que as aspas servem como separacao entre as partes
 //
-// nome: pode ter (opcional)         as apelido             at x           at x:y               apelido eh o nome que aparece, x eh a posicao hporizontal e y a vertical
+// nome: pode ter (opcional)         as apelido             at x           at x:y               apelido eh o nome que aparece, x eh a posicao horizontal e y a vertical
 //
 // fala:            fala normal fodase
 //
@@ -26,11 +28,11 @@ namespace DIALOGUE
         //responsavel por receber e entregar (receber o bruto e entregar o limpinho)
         public static DIALOGUE_LINE Process(string rawLine)
         {
-            Debug.Log($"Processando linha: '{rawLine}'");
+            Debug.Log($"Processando linha: '{rawLine}'");//DEBUGDEBUGDEBUGDEBUGDEBUGDEBUGDEBUGDEBUGDEBUGDEBUGDEBUGDEBUGDEBUGDEBUGDEBUGDEBUGDEBUGDEBUGDEBUGDEBUGDEBUGDEBUGDEBUGDEBUGDEBUG
 
             (string speaker, string dialogue, string commands) = SplitContent(rawLine);
 
-            Debug.Log($"Speaker = '{speaker}'\nDialogue = '{dialogue}'\nCommands = '{commands}'");
+            Debug.Log($"Speaker = '{speaker}'\nDialogue = '{dialogue}'\nCommands = '{commands}'");//DEBUGDEBUGDEBUGDEBUGDEBUGDEBUGDEBUGDEBUGDEBUGDEBUGDEBUGDEBUGDEBUGDEBUGDEBUGDEBUGDEBUGDEBUG
 
             return new DIALOGUE_LINE(speaker, dialogue, commands);
         }
