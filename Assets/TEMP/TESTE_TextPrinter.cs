@@ -1,9 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DIALOGUE;
 
-//garante que nada do teste vai aparecer em outros codigos
-namespace TESTE
+//classe para testar a impressao de textos na tela
+namespace TESTE //garante que nada do teste vai aparecer em outros codigos
 {
     public class TESTE_TextPrinter : MonoBehaviour
     {

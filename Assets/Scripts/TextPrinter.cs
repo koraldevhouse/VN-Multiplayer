@@ -2,24 +2,24 @@ using System.Collections;
 using UnityEngine;
 using TMPro;
 
+
+//classe responsavel por fazer o texto aparecer na tela
 public class TextPrinter
 {
     private TextMeshProUGUI tmpro_ui;
     private TextMeshPro tmpro_world;
     public TMP_Text tmpro => tmpro_ui != null ? tmpro_ui : tmpro_world; //permite arrastar o texto tanto da UI quanto do mundo 3D
 
-     //public string currentText => tmpro.text; //atualmente faz altos nada
-    public string targetText { get; private set; } = "";
-    public string preText { get; private set; } = ""; //pega o texto atual, serve pra adicionar a possibilidade de adicionar (append) ao texto atual ao inves de comecar um novo
-    public string fullTargetText => preText + targetText; //preText eh vazio exceto no caso do Append
+    public string targetText { get; private set; } = "";    //o proximo texto 
+    public string preText { get; private set; } = "";       //pega o texto atual, serve pra adicionar a possibilidade de adicionar (append) ao texto atual ao inves de comecar um novo
+    public string fullTargetText => preText + targetText;   //preText eh vazio exceto no caso do Append
 
     public Color textColor { get { return tmpro.color; } set { tmpro.color = value; } }
 
     //controla como o texto aparece
     //instant: instantaneo
     //typewriter: caractere por caractere
-    //fade: nao implementado
-    public enum BuildMethod { instant, typewriter, fade }
+    public enum BuildMethod { instant, typewriter }
     public BuildMethod buildMethod = BuildMethod.typewriter;
 
 
@@ -30,7 +30,6 @@ public class TextPrinter
     //permite imprimir mais de um caractere por frame 
     public int charactersPerCycle { get { return txtSpeed <= 2f ? characterMultiplier : txtSpeed <= 2.5f ? characterMultiplier * 2 : characterMultiplier * 3; } }
     private int characterMultiplier = 1;
-    //bool CELERA = false; //a ideia era acelerar o texto quando clica, e completar se clicar 2 vezes, mas acho melhor completar o dialogo direto logo
 
 
     //construtores
@@ -80,14 +79,11 @@ public class TextPrinter
     IEnumerator Building()
     {
         Prepare();
-
+        //podia ser um if, mas o switch faz ser (um tiquinho) mais facil de fazer updates no futuro
         switch (buildMethod)
         {
             case BuildMethod.typewriter:
                 yield return Build_Typewriter();
-                break;
-            case BuildMethod.fade:
-                yield return Build_Fade();
                 break;
         }
 
@@ -106,9 +102,6 @@ public class TextPrinter
             case BuildMethod.typewriter:
                 Prepare_Typewriter();
                 break;
-            case BuildMethod.fade:
-                Prepare_Fade();
-                break;
         }
     }
 
@@ -116,7 +109,6 @@ public class TextPrinter
     private void OnComplete()
     {
         buildProcess = null;
-        //CELERA = false;
     }
 
     public void ForceComplete()
@@ -125,8 +117,6 @@ public class TextPrinter
         {
             case BuildMethod.typewriter:
                 tmpro.maxVisibleCharacters = tmpro.textInfo.characterCount;
-                break;
-            case BuildMethod.fade:
                 break;
         }
     }
@@ -154,25 +144,18 @@ public class TextPrinter
         tmpro.text += targetText;
         tmpro.ForceMeshUpdate();
     }
-    private void Prepare_Fade()
-    {
-
-    }
 
     //implementacao que faz o texto aparecer letra por letra
     private IEnumerator Build_Typewriter()
     {
         while (tmpro.maxVisibleCharacters < tmpro.textInfo.characterCount)
         {
-            tmpro.maxVisibleCharacters += /*CELERA ? charactersPerCycle*5 :*/ charactersPerCycle;
+            tmpro.maxVisibleCharacters += charactersPerCycle;
             yield return new WaitForSeconds(0.015f / txtSpeed);
         }
         
     }
-    private IEnumerator Build_Fade()
-    {
-        yield return null;
-    }
+
 
 }
 

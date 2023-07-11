@@ -1,0 +1,3 @@
+Managers
+
+Classes responsaveis por cuidar de alguma tarefa especifica para o DialogueSystem
