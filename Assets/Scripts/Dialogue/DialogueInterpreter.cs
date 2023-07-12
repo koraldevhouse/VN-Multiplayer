@@ -2,9 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
 using UnityEngine;
-/// <summary>
-/// essa classe é responsavel por processar as linhas de texto do arquivo e passar para DIALOGUE_LINE armazenar
-/// </summary>
+
 
 
 // a estrutura da linha eh:      nome {outros parametros}      "fala"      funcoes()
@@ -19,6 +17,9 @@ using UnityEngine;
 
 namespace DIALOGUE
 {
+    /// <summary>
+    /// essa classe é responsavel por processar as linhas de texto do arquivo e passar para DIALOGUE_LINE armazenar
+    /// </summary>
     public class DialogueInterpreter
     {
         private const string commandRegexPattern = "\\w*[^\\s]\\("; // = \w*    (uma word de qualquer tamanho)

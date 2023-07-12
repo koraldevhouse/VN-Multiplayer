@@ -27,7 +27,7 @@ namespace TESTE //garante que nada do teste vai aparecer em outros codigos
         void Start()
         {
             ds = DialogueSystem.instance;
-            printer = new TextPrinter(ds.dialogueBox.dialogueText);
+            printer = new TextPrinter(ds.dialogueContainer.dialogueText);
             printer.buildMethod = TextPrinter.BuildMethod.typewriter; //muda como o texto eh impresso
         }
 

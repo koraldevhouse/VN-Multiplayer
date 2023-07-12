@@ -1,27 +1,34 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using TMPro;
 
-/// <summary>
-/// A caixa que segura o texto do nome na tela. Parte do dialogueBox
-/// </summary>
 
-public class NameContainer : MonoBehaviour
+
+namespace DIALOGUE
 {
-    [SerializeField] private GameObject root;
-    [SerializeField] private TextMeshProUGUI nameText;
-
-    public void Show(string nameToShow = "")
+    [System.Serializable]
+    /// <summary>
+    /// A caixa que segura o texto do nome na tela. Parte do dialogueContainer
+    /// </summary>
+    public class NameContainer
     {
-        root.SetActive(true);
+        [SerializeField] private GameObject root;
+        [SerializeField] private TextMeshProUGUI nameText;
+        //[SerializeField] private Image speakerImage;
 
-        if (nameToShow != "")
-            nameText.text = nameToShow;
-    }
+        public void Show(string nameToShow = "")
+        {
+            root.SetActive(true);
 
-    public void Hide()
-    {
-        root.SetActive(false);
+            if (nameToShow != "")
+                nameText.text = nameToShow;
+        }
+
+        public void Hide()
+        {
+            root.SetActive(false);
+        }
     }
 }

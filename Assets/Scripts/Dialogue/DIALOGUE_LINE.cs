@@ -2,12 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-/// <summary>
-/// responsavel por armazenar as informacoes ja processadas de uma linha do arquivo
-/// </summary>
+
 
 namespace DIALOGUE
-{
+{   
+    /// <summary>
+    /// responsavel por armazenar as informacoes ja processadas de uma linha do arquivo
+    /// </summary>
     public class DIALOGUE_LINE
     {
         public string speaker;

@@ -6,11 +6,10 @@ using TMPro;
 namespace DIALOGUE
 {
     [System.Serializable]
-    public class DialogueBox
+    public class DialogueContainer
     {
         public GameObject root; //raiz pra desabilitar o dialogo inteiro
-        public TextMeshProUGUI speaker;
+        public NameContainer nameContainer;
         public TextMeshProUGUI dialogueText;
-        //precisa implementar um sprite se pa
     }
 }

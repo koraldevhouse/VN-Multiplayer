@@ -2,12 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-/// <summary>
-/// lida com toda a logica para passar o dialogo na tela, uma linha de cada vez
-/// </summary>
 
 namespace DIALOGUE
 {
+    /// <summary>
+    /// lida com toda a logica para passar o dialogo na tela, uma linha de cada vez
+    /// </summary>
     public class ConversationManager
     {
         //referencia ao dialoguesystem pq ele vai rodar as co-rotinas
@@ -15,6 +15,21 @@ namespace DIALOGUE
          
         private Coroutine processo = null;
         public bool isRunning => (processo != null);
+
+        private TextPrinter printer = null;
+        private bool userPrompt = false;
+
+        //construtor
+        public ConversationManager(TextPrinter printer)
+        {
+            this.printer = printer;
+            dialogueSystem.onUserPrompt_Next += OnUserPrompt_Next;
+        }
+
+        private void OnUserPrompt_Next()
+        {
+
+        }
         
         public void StartConversation(List<string> conversation)
         {
@@ -50,16 +65,41 @@ namespace DIALOGUE
                 //roda os comandos
                 if (line.hasCommands)
                     yield return Line_RunCommands(line);
+
+                yield return new WaitForSeconds(1f);
             }
         }
 
         IEnumerator Line_RunDialogue(DIALOGUE_LINE line)
         {
-            yield return null;
+            // mostra ou esconde o conteiner do speaker dependendo se tiver um ou nao
+            if (line.hasSpeaker)
+                dialogueSystem.ShowSpeakerContainer(line.speaker);
+            else dialogueSystem.HideSpeakerContainer();
+
+            //constroi o dialogo
+            yield return BuildDialogue(line.dialogue);
         }
 
         IEnumerator Line_RunCommands(DIALOGUE_LINE line)
         {
+            Debug.Log(line.commands);
+
+            yield return null;
+        }
+
+        IEnumerator BuildDialogue(string dialogue)
+        {
+            printer.Build(dialogue);
+
+   //         while (printer.isBuilding)
+            {
+                if (userPrompt)
+                {
+                    printer.ForceComplete();
+                    userPrompt = false;
+                }
+            }
             yield return null;
         }
     }
