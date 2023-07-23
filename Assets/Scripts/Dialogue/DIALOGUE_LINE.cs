@@ -15,9 +15,9 @@ namespace DIALOGUE
         public string dialogue;
         public string commands;
 
-        public bool hasSpeaker => (speaker != "");
-        public bool hasDialogue => (dialogue != "");
-        public bool hasCommands => (commands != "");
+        public bool hasSpeaker => (speaker != string.Empty);
+        public bool hasDialogue => (dialogue != string.Empty);
+        public bool hasCommands => (commands != string.Empty);
 
         //construtor
         public DIALOGUE_LINE(string speaker, string dialogue, string commands)

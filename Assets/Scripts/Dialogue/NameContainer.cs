@@ -22,7 +22,7 @@ namespace DIALOGUE
         {
             root.SetActive(true);
 
-            if (nameToShow != "")
+            if (nameToShow != string.Empty)
                 nameText.text = nameToShow;
         }
 

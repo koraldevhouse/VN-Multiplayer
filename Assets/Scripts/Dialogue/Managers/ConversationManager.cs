@@ -28,7 +28,7 @@ namespace DIALOGUE
 
         private void OnUserPrompt_Next()
         {
-
+            userPrompt = true;
         }
         
         public void StartConversation(List<string> conversation)
@@ -65,8 +65,6 @@ namespace DIALOGUE
                 //roda os comandos
                 if (line.hasCommands)
                     yield return Line_RunCommands(line);
-
-                yield return new WaitForSeconds(1f);
             }
         }
 
@@ -79,6 +77,9 @@ namespace DIALOGUE
 
             //constroi o dialogo
             yield return BuildDialogue(line.dialogue);
+
+            //espera um input do player
+            yield return WaitForPlayerInput();
         }
 
         IEnumerator Line_RunCommands(DIALOGUE_LINE line)
@@ -92,15 +93,24 @@ namespace DIALOGUE
         {
             printer.Build(dialogue);
 
-   //         while (printer.isBuilding)
+            while (printer.isBuilding)
             {
                 if (userPrompt)
                 {
                     printer.ForceComplete();
                     userPrompt = false;
                 }
+                yield return null;
             }
-            yield return null;
+            
+        }
+
+        IEnumerator WaitForPlayerInput()
+        {
+            while (!userPrompt)
+                yield return null;
+
+            userPrompt = false;
         }
     }
 }

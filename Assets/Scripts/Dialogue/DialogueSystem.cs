@@ -46,7 +46,7 @@ namespace DIALOGUE
 
             printer = new TextPrinter(dialogueContainer.dialogueText);
             conversationManager = new ConversationManager(printer);
-            initialized = true;
+            //initialized = true;
             return;
         }
 
@@ -59,6 +59,8 @@ namespace DIALOGUE
         //faz o nameContainer aparecer (e possivelmente updeitar) ou esconder
         public void ShowSpeakerContainer(string speakerName = "")
         {
+
+            //if(speakerName.ToLower() == "player") (futura implementacao caso for atribuir uma imagem ao player)
             if (speakerName != "")
                 dialogueContainer.nameContainer.Show(speakerName);
             else
